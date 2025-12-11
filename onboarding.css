@@ -1,0 +1,93 @@
+/* onboarding.css */
+
+/* --- Base Settings --- */
+body {
+    background-color: #0f172a; /* Slate 900 fallback */
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- Aurora Background Animation --- */
+@keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* --- Glassmorphism Utilities --- */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- "Cinema Focus" Logic for 3-Door Entry --- */
+/* When hovering the container, dim ALL cards */
+.group\/portal:hover .door-card {
+    opacity: 0.5;
+    filter: blur(3px);
+    transform: scale(0.95);
+    background: rgba(255,255,255,0.02);
+}
+
+/* Immediately highlight the specific card being hovered */
+.group\/portal .door-card:hover {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1.05);
+    z-index: 20;
+    border-color: rgba(255, 255, 255, 0.2); 
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Specific Border Colors on Hover */
+.group\/portal .door-card.hover-blue:hover { border-color: rgba(59, 130, 246, 0.5); }
+.group\/portal .door-card.hover-pink:hover { border-color: rgba(236, 72, 153, 0.5); }
+.group\/portal .door-card.hover-emerald:hover { border-color: rgba(16, 185, 129, 0.5); }
+/* Immediately highlight the specific card being hovered */
+.group\/portal .door-card:hover {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1.05);
+    z-index: 20;
+    border-color: rgba(59, 130, 246, 0.5); /* Blue tint border */
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Toggle Switch Styling --- */
+.toggle-checkbox:checked {
+    right: 0;
+    border-color: #2563eb;
+}
+.toggle-checkbox:checked + .toggle-label {
+    background-color: #2563eb;
+}
+
+/* --- Utility: Hide Scrollbar --- */
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+.hide-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* --- Perspective for 3D Flips --- */
+.perspective-1000 {
+    perspective: 1000px;
+}

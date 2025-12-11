@@ -1,0 +1,67 @@
+Accounting Suites
+1C:Enterprise
+24SevenOffice
+AccountView
+Acumatica
+Acumulus
+Addison
+AFAS
+Alegra
+Asperion
+Banqup
+Basecone
+Bexio
+Bill-to-box
+Bind ERP
+Cash Software
+Collmex
+Contpaqi
+DATEV
+Defontana
+e-Boekhouden.nl
+e-conomic
+Exact Online
+Financio
+Fortnox
+FreshBooks
+Infor
+JeFacture
+Kashoo
+King Business Software
+Kingdee
+Lexware
+Manager
+Microsoft Dynamics 365
+Moneybird
+MYOB
+Nubox
+Octopus
+Odoo
+Omie
+Oracle NetSuite
+QuickBooks Online
+Reckon
+Reeleezee
+Rompslomp
+Sage
+Sage 300
+Sage 50
+Sage Intacct
+SAP Business One
+SevDesk
+Siigo
+SnelStart
+Tally Solutions
+Tipalti
+TOTVS
+Twinfield
+Unified Post
+Visma eAccounting
+Wave Accounting
+WinBooks
+Workday Financials
+Xero
+Yardi
+Yonyou
+Yuki
+Zoho Books

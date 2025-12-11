@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaxCredible Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="onboarding.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        mc: { blue: '#0ea5e9', pink: '#fce7f3', green: '#dcfce7', dark: '#0f172a' }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white antialiased overflow-x-hidden selection:bg-blue-500 selection:text-white">
+
+    <nav class="w-full px-8 py-6 flex justify-between items-center fixed top-0 z-50 transition-all duration-300 bg-gradient-to-b from-gray-900 to-transparent">
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="window.location.reload()">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg shadow-blue-900/20 group-hover:scale-105 transition-transform">M</div>
+            <span class="text-2xl font-bold tracking-tight text-white group-hover:text-blue-200 transition-colors">MaxCredible</span>
+        </div>
+        <div class="flex gap-6 items-center">
+            <button onclick="skipOnboarding()" class="text-sm font-medium text-gray-500 hover:text-white transition-colors">Skip Onboarding</button>
+            <div class="h-4 w-px bg-gray-700"></div>
+            <button class="text-sm font-medium text-gray-400 hover:text-white transition-colors">Help</button>
+            <button class="text-sm font-medium bg-white/10 hover:bg-white/20 px-5 py-2 rounded-full transition-all border border-white/5">Login</button>
+        </div>
+    </nav>
+
+    <section id="entry-section" class="min-h-screen pt-32 pb-10 flex flex-col items-center justify-center relative transition-opacity duration-500">
+        
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob"></div>
+            <div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-[-20%] left-[20%] w-[40%] h-[40%] bg-emerald-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="relative z-10 w-[95%] max-w-[1600px] mx-auto px-6 text-center">
+            
+            <div class="mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-200 via-white to-blue-200 leading-tight">
+                    Your Cash Flow, <span class="text-white">Accelerated.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    Select your goal to get started. No registration required to explore.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto group/portal">
+                
+                <div class="door-card hover-blue group relative p-8 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 cursor-pointer flex flex-col min-h-[500px] overflow-hidden text-center"
+                     onclick="startFlow('action')">
+                    
+                    <div class="relative z-10 flex flex-col h-full items-center">
+                        <div class="h-24 flex items-center justify-center mb-6">
+                            <div class="w-20 h-20 bg-gradient-to-tr from-blue-500 to-cyan-400 rounded-3xl shadow-lg shadow-blue-500/20 transform group-hover:rotate-12 transition-transform duration-500 flex items-center justify-center">
+                                <i class="ph-fill ph-paper-plane-tilt text-4xl text-white"></i>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-3xl font-bold mb-2 group-hover:text-blue-300 transition-colors">Get Paid Faster</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8">Automate dunning & create a payment journey in seconds.</p>
+                        
+                        <div class="mt-auto w-full space-y-4 max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-700 ease-in-out opacity-0 group-hover:opacity-100 text-left">
+                            <div class="space-y-3 pt-4 border-t border-white/10 px-2">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ph-bold ph-check text-xs"></i></div>
+                                    <p class="text-xs text-gray-300"><strong>Perfect for:</strong> Testing UX, sending single invoices, design lovers.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-gray-700/50 text-gray-400 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ph-bold ph-x text-xs"></i></div>
+                                    <p class="text-xs text-gray-500"><strong>Not for:</strong> Bulk importing 1,000+ debtors.</p>
+                                </div>
+                            </div>
+                            
+                            <button class="w-full py-4 rounded-xl bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/30 hover:bg-blue-500 transition-all flex items-center justify-center gap-2 group/btn">
+                                Design My Invoice <i class="ph-bold ph-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="door-card hover-pink group relative p-8 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 cursor-pointer flex flex-col min-h-[500px] overflow-hidden text-center"
+                     onclick="startFlow('insight')">
+                    
+                    <div class="relative z-10 flex flex-col h-full items-center">
+                        <div class="h-24 flex items-center justify-center mb-6">
+                            <div class="w-20 h-20 bg-gradient-to-tr from-pink-500 to-rose-400 rounded-full shadow-lg shadow-pink-500/20 transform group-hover:-translate-y-2 transition-transform duration-500 flex items-center justify-center">
+                                <i class="ph-fill ph-magnifying-glass text-4xl text-white"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-3xl font-bold mb-2 group-hover:text-pink-300 transition-colors">Analyze Risk</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8">See your debtor health scores and discover hidden cash flow gaps.</p>
+                        
+                        <div class="mt-auto w-full space-y-4 max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-700 ease-in-out opacity-0 group-hover:opacity-100 text-left">
+                             <div class="space-y-3 pt-4 border-t border-white/10 px-2">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ph-bold ph-check text-xs"></i></div>
+                                    <p class="text-xs text-gray-300"><strong>Perfect for:</strong> CFOs, Credit Managers, businesses with >50 clients.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-gray-700/50 text-gray-400 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ph-bold ph-x text-xs"></i></div>
+                                    <p class="text-xs text-gray-500"><strong>Not for:</strong> New businesses with zero transaction history.</p>
+                                </div>
+                            </div>
+                            
+                            <button class="w-full py-4 rounded-xl bg-pink-600 text-white font-bold shadow-lg shadow-pink-600/30 hover:bg-pink-500 transition-all flex items-center justify-center gap-2 group/btn">
+                                Run Health Check <i class="ph-bold ph-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="door-card hover-emerald group relative p-8 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 cursor-pointer flex flex-col min-h-[500px] overflow-hidden text-center"
+                     onclick="startFlow('benchmark')">
+                    
+                    <div class="relative z-10 flex flex-col h-full items-center">
+                        <div class="h-24 flex items-center justify-center mb-6">
+                            <div class="w-20 h-20 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-2xl shadow-lg shadow-emerald-500/20 transform group-hover:scale-110 transition-transform duration-500 flex items-center justify-center">
+                                <i class="ph-fill ph-chart-bar text-4xl text-white"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-3xl font-bold mb-2 group-hover:text-emerald-300 transition-colors">Benchmark</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-8">Compare your Days Sales Outstanding (DSO) against the industry standard.</p>
+                        
+                        <div class="mt-auto w-full space-y-4 max-h-0 overflow-hidden group-hover:max-h-[300px] transition-all duration-700 ease-in-out opacity-0 group-hover:opacity-100 text-left">
+                             <div class="space-y-3 pt-4 border-t border-white/10 px-2">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ph-bold ph-check text-xs"></i></div>
+                                    <p class="text-xs text-gray-300"><strong>Perfect for:</strong> Optimization geeks, competitive sectors, scaling SaaS.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-gray-700/50 text-gray-400 flex items-center justify-center flex-shrink-0 mt-0.5"><i class="ph-bold ph-x text-xs"></i></div>
+                                    <p class="text-xs text-gray-500"><strong>Not for:</strong> Users looking for a quick "send invoice" tool.</p>
+                                </div>
+                            </div>
+                            
+                            <button class="w-full py-4 rounded-xl bg-emerald-600 text-white font-bold shadow-lg shadow-emerald-600/30 hover:bg-emerald-500 transition-all flex items-center justify-center gap-2 group/btn">
+                                Compare My Data <i class="ph-bold ph-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="flow-1a-input" class="hidden min-h-screen pt-24 pb-10 flex flex-col justify-center relative overflow-hidden transition-opacity duration-700 opacity-0">
+    
+    <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob"></div>
+        <div class="absolute bottom-[-20%] right-[20%] w-[40%] h-[40%] bg-purple-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div class="relative z-10 w-[95%] max-w-[1600px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start h-full">
+        
+        <div class="space-y-6 h-full flex flex-col justify-center">
+            <div>
+                <button onclick="goBackToEntry()" class="text-sm text-blue-400 hover:text-white mb-4 flex items-center gap-2 transition-colors">
+                    <i class="ph-bold ph-arrow-left"></i> Back
+                </button>
+                <h2 class="text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-white mb-2">
+                    Craft your correspondence.
+                </h2>
+                <p class="text-lg text-gray-400">
+                    Input details and customize the layout to match your brand.
+                </p>
+            </div>
+
+            <div class="bg-gray-800/60 backdrop-blur-xl border border-white/10 rounded-[2rem] p-6 shadow-2xl">
+                
+                <div class="flex space-x-1 bg-gray-900/50 p-1 rounded-xl mb-6">
+                    <button class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all bg-blue-600 text-white shadow-md" id="tab-data" onclick="switchDesignTab('data')">
+                        <i class="ph-bold ph-pencil-simple mr-2"></i> Data
+                    </button>
+                    <button class="flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-white/5" id="tab-style" onclick="switchDesignTab('style')">
+                        <i class="ph-bold ph-paint-bucket mr-2"></i> Style
+                    </button>
+                </div>
+
+                <div id="panel-data" class="space-y-6 animate-fade-in custom-scrollbar overflow-y-auto max-h-[65vh] pr-2 pb-10">
+                    
+                    <div class="space-y-5">
+                        
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-blue-400 uppercase tracking-widest flex justify-between">
+                                Client Website <span class="text-gray-600 font-normal normal-case">*Required</span>
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="client-website" placeholder="e.g. tesla.com" 
+                                    class="w-full bg-gray-900/50 border border-gray-600 text-white text-lg rounded-xl px-4 py-3 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-all placeholder-gray-600"
+                                    onkeyup="fetchBrand(this.value)">
+                                <div id="brand-loader" class="absolute right-4 top-3.5 hidden">
+                                    <i class="ph-bold ph-spinner animate-spin text-blue-400 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-1/2 space-y-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest flex justify-between">
+                                    Amount <span class="text-gray-600 font-normal normal-case">*Required</span>
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-3.5 text-gray-400">$</span>
+                                    <input type="number" id="invoice-amount" value="5000" 
+                                        class="w-full bg-gray-900/50 border border-gray-600 text-white text-lg rounded-xl pl-8 pr-4 py-3 focus:border-blue-400 focus:outline-none transition-all"
+                                        oninput="updatePreview()">
+                                </div>
+                            </div>
+                            <div class="w-1/2 space-y-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest flex justify-between">
+                                    Due Date <span class="text-gray-600 font-normal normal-case">*Required</span>
+                                </label>
+                                <input type="date" id="invoice-due" 
+                                    class="w-full bg-gray-900/50 border border-gray-600 text-white text-lg rounded-xl px-4 py-3 focus:border-blue-400 focus:outline-none transition-all placeholder-gray-500"
+                                    oninput="updatePreview()">
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-1/3 space-y-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">Invoice #</label>
+                                <input type="text" id="invoice-number" value="INV-2024-001" 
+                                    class="w-full bg-gray-900/50 border border-gray-600 text-white text-lg rounded-xl px-4 py-3 focus:border-blue-400 focus:outline-none transition-all"
+                                    oninput="updatePreview()">
+                            </div>
+                            <div class="w-2/3 space-y-2">
+                                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">Description</label>
+                                <input type="text" id="invoice-desc" placeholder="Professional Services" 
+                                    class="w-full bg-gray-900/50 border border-gray-600 text-white text-lg rounded-xl px-4 py-3 focus:border-blue-400 focus:outline-none transition-all"
+                                    oninput="updatePreview()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-4 border-t border-white/5">
+                        <p class="text-[10px] uppercase tracking-widest text-gray-600 font-bold mb-2">Optional Details</p>
+
+                        <div class="bg-gray-800/40 border border-white/10 rounded-xl overflow-hidden transition-all duration-300">
+                            <div class="p-3 flex items-center justify-between cursor-pointer bg-white/5 hover:bg-white/10" onclick="toggleAccordion('acc-client-ext')">
+                                <span class="text-sm font-bold text-gray-300 flex items-center gap-2"><i class="ph-bold ph-user"></i> Client Details</span>
+                                <i class="ph-bold ph-caret-down text-gray-500 transition-transform duration-300" id="icon-acc-client-ext"></i>
+                            </div>
+                            <div id="acc-client-ext" class="max-h-0 transition-all duration-500 ease-in-out overflow-hidden">
+                                <div class="p-4 space-y-3 border-t border-white/5 bg-gray-900/30">
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-gray-500 uppercase">Customer Name</label>
+                                        <input type="text" id="client-name" placeholder="Auto-filled from website" 
+                                            class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
+                                            oninput="updateEntityDetails()">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-gray-500 uppercase">Address</label>
+                                        <input type="text" id="client-address" placeholder="e.g. 123 Main St" 
+                                            class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
+                                            oninput="updateEntityDetails()">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-gray-500 uppercase">Registration Number</label>
+                                        <input type="text" id="client-reg" placeholder="Optional" 
+                                            class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-blue-500 focus:outline-none"
+                                            oninput="updateEntityDetails()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800/40 border border-white/10 rounded-xl overflow-hidden transition-all duration-300">
+                            <div class="p-3 flex items-center justify-between cursor-pointer bg-white/5 hover:bg-white/10" onclick="toggleAccordion('acc-sender-ext')">
+                                <span class="text-sm font-bold text-gray-300 flex items-center gap-2"><i class="ph-bold ph-buildings"></i> My Company</span>
+                                <i class="ph-bold ph-caret-down text-gray-500 transition-transform duration-300" id="icon-acc-sender-ext"></i>
+                            </div>
+                            <div id="acc-sender-ext" class="max-h-0 transition-all duration-500 ease-in-out overflow-hidden">
+                                <div class="p-4 space-y-3 border-t border-white/5 bg-gray-900/30">
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-gray-500 uppercase">Business Name</label>
+                                        <input type="text" id="sender-name" value="MaxCredible Inc." 
+                                            class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-purple-500 focus:outline-none"
+                                            oninput="updateEntityDetails()">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-gray-500 uppercase">Address</label>
+                                        <input type="text" id="sender-address" value="123 Finance St, NY" 
+                                            class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-purple-500 focus:outline-none"
+                                            oninput="updateEntityDetails()">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-[10px] text-gray-500 uppercase">Tax ID / VAT</label>
+                                        <input type="text" id="sender-tax" value="US-123456789" 
+                                            class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-purple-500 focus:outline-none"
+                                            oninput="updateEntityDetails()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="bg-gray-800/40 border border-white/10 rounded-xl overflow-hidden transition-all duration-300">
+                            <div class="p-3 flex items-center justify-between cursor-pointer bg-white/5 hover:bg-white/10" onclick="toggleAccordion('acc-inv-ext')">
+                                <span class="text-sm font-bold text-gray-300 flex items-center gap-2"><i class="ph-bold ph-file-text"></i> Invoice Extras</span>
+                                <i class="ph-bold ph-caret-down text-gray-500 transition-transform duration-300" id="icon-acc-inv-ext"></i>
+                            </div>
+                            <div id="acc-inv-ext" class="max-h-0 transition-all duration-500 ease-in-out overflow-hidden">
+                                <div class="p-4 space-y-3 border-t border-white/5 bg-gray-900/30">
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] text-gray-500 uppercase">Issue Date</label>
+                                            <input type="date" id="invoice-date" 
+                                                class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-green-500 focus:outline-none"
+                                                oninput="updatePreview()">
+                                        </div>
+                                        <div class="space-y-1">
+                                            <label class="text-[10px] text-gray-500 uppercase">VAT Amount</label>
+                                            <input type="number" id="invoice-vat" placeholder="0.00" 
+                                                class="w-full bg-gray-900/50 border border-gray-700 text-white text-sm rounded-lg px-3 py-2 focus:border-green-500 focus:outline-none"
+                                                oninput="updatePreview()">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="panel-style" class="space-y-5 hidden animate-fade-in">
+                    
+                    <div class="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                        <span class="text-sm font-medium text-gray-300">Layout Width</span>
+                        <div class="flex bg-gray-900 rounded-lg p-1">
+                            <button onclick="updateStyle('layout', 'narrow')" class="px-3 py-1 rounded-md text-xs font-bold bg-blue-600 text-white transition-all" id="btn-layout-narrow">Narrow</button>
+                            <button onclick="updateStyle('layout', 'wide')" class="px-3 py-1 rounded-md text-xs font-bold text-gray-400 hover:text-white transition-all" id="btn-layout-wide">Wide</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors" onclick="toggleElement('banner')">
+                            <span class="text-sm text-gray-300 flex items-center gap-2"><i class="ph-fill ph-image"></i> Banner</span>
+                            <div class="w-4 h-4 rounded-full border border-gray-500 transition-colors" id="check-banner"></div>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-xl border border-white/5 flex items-center justify-between cursor-pointer hover:bg-white/10 transition-colors" onclick="toggleElement('footer')">
+                            <span class="text-sm text-gray-300 flex items-center gap-2"><i class="ph-fill ph-text-columns"></i> Footer</span>
+                            <div class="w-4 h-4 rounded-full border border-gray-500 bg-blue-500 border-blue-500 transition-colors" id="check-footer"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-widest">Component Style</label>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">Invoice Display</span>
+                            <select onchange="updateStyle('invoice', this.value)" class="bg-gray-900 border border-gray-600 text-gray-300 text-xs rounded-lg px-2 py-1 focus:outline-none focus:border-blue-500">
+                                <option value="simple">Simple Text</option>
+                                <option value="card" selected>Modern Card</option>
+                                <option value="table">Formal Table</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-300">Bank Details</span>
+                            <select onchange="updateStyle('bank', this.value)" class="bg-gray-900 border border-gray-600 text-gray-300 text-xs rounded-lg px-2 py-1 focus:outline-none focus:border-blue-500">
+                                <option value="hidden">Hidden (Link Only)</option>
+                                <option value="footer">Small Footer</option>
+                                <option value="table">Prominent Table</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <label class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2 block">Brand Accent</label>
+                        <div class="flex gap-3">
+                            <button onclick="updateStyle('color', 'blue')" class="w-6 h-6 rounded-full bg-blue-600 ring-2 ring-offset-2 ring-offset-gray-800 ring-white"></button>
+                            <button onclick="updateStyle('color', 'emerald')" class="w-6 h-6 rounded-full bg-emerald-500 hover:ring-2 ring-offset-2 ring-offset-gray-800 ring-white transition-all"></button>
+                            <button onclick="updateStyle('color', 'purple')" class="w-6 h-6 rounded-full bg-purple-500 hover:ring-2 ring-offset-2 ring-offset-gray-800 ring-white transition-all"></button>
+                            <button onclick="updateStyle('color', 'slate')" class="w-6 h-6 rounded-full bg-slate-500 hover:ring-2 ring-offset-2 ring-offset-gray-800 ring-white transition-all"></button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4 opacity-50 pointer-events-none transition-all duration-500" id="action-buttons">
+                <button onclick="goToTimeline()" class="flex-1 py-5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-lg shadow-lg shadow-blue-600/30 transition-all transform hover:-translate-y-1">
+                    Automate Follow-up
+                    <span class="block text-xs font-normal opacity-80 mt-1">Recommended</span>
+                </button>
+                <button class="px-8 py-5 rounded-2xl border border-white/20 hover:bg-white/10 text-gray-300 font-medium text-lg transition-all">
+                    Send One-Off
+                </button>
+            </div>
+        </div>
+
+        <div class="perspective-1000 hidden lg:flex justify-center items-center h-full opacity-0 transition-all duration-700 translate-x-10" id="preview-wrapper">
+            <div id="preview-container" class="relative bg-white text-gray-800 rounded-lg shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] min-h-[650px] w-full max-w-md mx-auto transform transition-all duration-700 border border-gray-200 flex flex-col overflow-hidden rotate-y-6">
+                
+                <div id="preview-header" class="h-2 bg-blue-600 w-full transition-colors duration-500"></div>
+
+                <div id="preview-banner" class="h-24 bg-gray-100 w-full hidden items-center justify-center overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80" class="w-full h-full object-cover opacity-80" alt="Banner">
+                </div>
+
+                <div class="p-8 flex-grow flex flex-col">
+                    
+                    <div class="flex justify-between items-start mb-10">
+                        <div id="logo-placeholder" class="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center text-gray-300 transition-all duration-500">
+                            <i class="ph-fill ph-image text-2xl"></i>
+                        </div>
+                        <div class="text-right">
+                            <h3 class="font-bold text-2xl text-gray-900 tracking-tight">INVOICE</h3>
+                            <p class="text-gray-500 font-mono text-sm mt-1" id="preview-inv-num-display">#INV-2024-001</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-10">
+                        <p class="text-[10px] font-bold text-gray-400 uppercase mb-2 tracking-widest">Bill To</p>
+                        <h4 id="preview-client-name" class="text-xl font-bold text-gray-900">Client Name</h4>
+                        <p class="text-gray-500 text-sm" id="preview-website">client@email.com</p>
+                    </div>
+
+                    <div id="invoice-display-area" class="mb-8">
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl p-5">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-medium text-gray-500 uppercase">Amount Due</span>
+                                <span class="text-xl font-bold text-gray-900" id="preview-amount">$5,000.00</span>
+                            </div>
+                            <div class="w-full bg-gray-200 h-px mb-3"></div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-gray-500">Due Date</span>
+                                <span class="font-medium text-red-500">Oct 17, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="bank-display-area" class="hidden mb-6 text-xs text-gray-500 bg-gray-50 p-3 rounded border border-gray-200">
+                        <div class="grid grid-cols-2 gap-2">
+                            <span class="font-semibold">Bank:</span> <span>MaxBank Intl</span>
+                            <span class="font-semibold">IBAN:</span> <span>NL88 MAXB 0123 4567 89</span>
+                            <span class="font-semibold">BIC:</span> <span>MAXBNL2A</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-auto">
+                        <div class="text-center pt-2">
+                            <button id="preview-cta" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 w-full">
+                                Pay Now securely
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="preview-footer" class="bg-gray-50 py-3 text-center border-t border-gray-200 text-[10px] text-gray-400">
+                    <p>MaxCredible Inc • 123 Finance St, NY • VAT: US123456789</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <section id="flow-1b-timeline" class="hidden min-h-screen pt-28 pb-4 flex flex-col relative overflow-hidden bg-gray-900 text-white font-sans transition-opacity duration-700 opacity-0">
+        
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-[-10%] right-[-10%] w-[30%] h-[30%] bg-indigo-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob"></div>
+            <div class="absolute bottom-[-10%] left-[10%] w-[30%] h-[30%] bg-blue-600 rounded-full mix-blend-screen filter blur-[128px] opacity-15 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="relative z-10 w-[95%] max-w-[1700px] mx-auto px-4 h-full flex flex-col">
+            
+            <div class="flex justify-between items-center mb-6 flex-shrink-0">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight">Design your workflow</h2>
+                    <p class="text-gray-400 text-sm">Visualize and automate your payment collection journey.</p>
+                </div>
+                <div class="text-right hidden sm:block">
+                    <p class="text-slate-400 text-xs uppercase tracking-wide">Est. Recovery</p>
+                    <p class="text-xl font-bold text-emerald-400">98% <span class="text-xs text-slate-500 font-normal">(vs 75% manual)</span></p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-12 gap-6 h-[calc(100vh-180px)] min-h-[500px]">
+                
+                <div class="col-span-12 lg:col-span-4 flex flex-col gap-4 h-full overflow-hidden">
+                    
+                    <div class="bg-gray-800/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl flex-grow overflow-y-auto custom-scrollbar">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Timeline Sequence</h3>
+                        
+                        <div class="relative pl-4 border-l-2 border-slate-700 space-y-8 ml-2 pb-4">
+                            
+                            <div class="relative group cursor-pointer" onclick="toggleStep('preminder')">
+                                <div id="dot-preminder" class="absolute -left-[23px] top-1 w-4 h-4 rounded-full border-2 border-gray-800 bg-slate-600 transition-all duration-300 z-10 shadow-lg"></div>
+                                <div class="flex justify-between items-center pl-4">
+                                    <div class="opacity-50 transition-all duration-300" id="text-preminder">
+                                        <h4 class="font-bold text-base text-gray-200">Pre-minder</h4>
+                                        <p class="text-xs text-gray-500">3 days before due date</p>
+                                    </div>
+                                    <div class="toggle-switch relative w-10 h-5 bg-gray-700 rounded-full transition-colors duration-300" id="toggle-preminder">
+                                        <div class="dot absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform duration-300"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative cursor-default opacity-60">
+                                <div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full border-2 border-gray-800 bg-blue-500 z-10"></div>
+                                <div class="pl-4">
+                                    <h4 class="font-bold text-base text-blue-400">Day 0: Due Date</h4>
+                                    <p class="text-xs text-slate-500">Payment Expected</p>
+                                </div>
+                            </div>
+
+                            <div class="relative group cursor-pointer" onclick="selectStep('reminder1')">
+                                <div id="dot-reminder1" class="absolute -left-[27px] top-0 w-6 h-6 rounded-full border-4 border-gray-800 bg-blue-500 shadow-lg shadow-blue-500/30 z-20 scale-110 transition-all"></div>
+                                <div class="pl-4 p-3 -m-3 rounded-xl bg-white/5 border border-white/10 transition-all" id="card-reminder1">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <h4 class="font-bold text-base text-white">1st Reminder</h4>
+                                            <p class="text-xs text-blue-200">7 days after due date</p>
+                                        </div>
+                                        <i class="ph-fill ph-pencil-simple text-slate-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative group cursor-pointer" onclick="toggleStep('reminder2')">
+                                <div id="dot-reminder2" class="absolute -left-[23px] top-1 w-4 h-4 rounded-full border-2 border-gray-800 bg-slate-600 transition-all duration-300 z-10"></div>
+                                <div class="flex justify-between items-center pl-4">
+                                    <div class="opacity-50 transition-all duration-300" id="text-reminder2">
+                                        <h4 class="font-bold text-base text-gray-200">2nd Reminder</h4>
+                                        <p class="text-xs text-gray-500">14 days after due date</p>
+                                    </div>
+                                    <div class="toggle-switch relative w-10 h-5 bg-gray-700 rounded-full transition-colors duration-300" id="toggle-reminder2">
+                                        <div class="dot absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform duration-300"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="relative group cursor-pointer" onclick="toggleStep('final')">
+                                <div id="dot-final" class="absolute -left-[23px] top-1 w-4 h-4 rounded-full border-2 border-gray-800 bg-slate-600 transition-all duration-300 z-10"></div>
+                                <div class="flex justify-between items-center pl-4">
+                                    <div class="opacity-50 transition-all duration-300" id="text-final">
+                                        <h4 class="font-bold text-base text-gray-200">Final Notice</h4>
+                                        <p class="text-xs text-gray-500">30 days after due date</p>
+                                    </div>
+                                    <div class="toggle-switch relative w-10 h-5 bg-gray-700 rounded-full transition-colors duration-300" id="toggle-final">
+                                        <div class="dot absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform duration-300"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl flex-shrink-0 mb-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                                <i class="ph-fill ph-lightning text-yellow-400"></i> Smart Actions
+                            </h3>
+                            <span class="text-[10px] bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded border border-blue-500/30">Pro</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between group cursor-pointer" onclick="toggleSmartAction('paylink')">
+                                <div>
+                                    <p class="text-sm font-bold text-gray-200 group-hover:text-white">Include Payment Link</p>
+                                    <p class="text-xs text-gray-500">Auto-generated Stripe/PayPal link</p>
+                                </div>
+                                <div class="relative w-10 h-5 bg-green-500 rounded-full transition-colors" id="toggle-paylink">
+                                    <div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full transition-transform"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between group cursor-pointer" onclick="toggleSmartAction('responses')">
+                                <div>
+                                    <p class="text-sm font-bold text-gray-200 group-hover:text-white">1-Click Responses</p>
+                                    <p class="text-xs text-gray-500">Allow "Pay Later" or "Dispute"</p>
+                                </div>
+                                <div class="relative w-10 h-5 bg-gray-700 rounded-full transition-colors" id="toggle-responses">
+                                    <div class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition-transform"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-xl flex-shrink-0">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Tone of Voice</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="setTone('friendly')" id="btn-friendly" class="p-3 rounded-xl border border-blue-500 bg-blue-500/20 text-white flex items-center justify-center gap-2 transition-all hover:scale-[1.02]">
+                                <i class="ph-fill ph-smiley text-xl"></i>
+                                <span class="text-sm font-semibold">Friendly</span>
+                            </button>
+                            <button onclick="setTone('professional')" id="btn-professional" class="p-3 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:bg-white/10 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]">
+                                <i class="ph-fill ph-briefcase text-xl"></i>
+                                <span class="text-sm font-semibold">Pro</span>
+                            </button>
+                            <button onclick="setTone('strict')" id="btn-strict" class="p-3 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:bg-white/10 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]">
+                                <i class="ph-fill ph-gavel text-xl"></i>
+                                <span class="text-sm font-semibold">Strict</span>
+                            </button>
+                            <button onclick="setTone('custom')" id="btn-custom" class="p-3 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:bg-white/10 flex items-center justify-center gap-2 transition-all hover:scale-[1.02]">
+                                <i class="ph-fill ph-sliders text-xl"></i>
+                                <span class="text-sm font-semibold">Custom</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-span-12 lg:col-span-8 flex flex-col h-full">
+                    
+                    <div class="flex-grow bg-white text-gray-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col relative transition-all duration-500 transform" id="preview-window">
+                        
+                        <div class="bg-gray-100 border-b border-gray-200 px-4 py-3 flex items-center justify-between flex-shrink-0">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                            <div class="text-[10px] font-medium text-gray-500 bg-white px-3 py-1 rounded-md shadow-sm border border-gray-200 truncate max-w-[200px]">
+                                <span id="preview-subject">Friendly Reminder: Invoice #INV-2024-001</span>
+                            </div>
+                            <div class="w-10"></div>
+                        </div>
+
+                        <div class="p-8 overflow-y-auto custom-scrollbar flex-grow">
+                            
+                            <div class="flex justify-between items-start mb-8">
+                                <div id="preview-logo-container" class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                                    T
+                                </div>
+                                <div class="text-right text-[10px] text-gray-400">
+                                    <p id="preview-date">Sent: Oct 24, 2025</p>
+                                    <p>To: finance@client.com</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6 text-gray-700 leading-relaxed text-sm" id="email-content-area">
+                                <h1 class="text-xl font-bold text-gray-900" id="preview-headline">Hi Finance Team,</h1>
+                                
+                                <p id="preview-body-1">
+                                    We hope you're having a great week! This is just a friendly nudge that invoice <strong class="text-blue-600 bg-blue-50 px-1 rounded">#INV-2024-001</strong> was due on <strong>Oct 17, 2025</strong>.
+                                </p>
+                                
+                                <p id="preview-body-2">
+                                    We know things get busy, so we've attached a copy for your records. If you've already sent payment, please disregard this note.
+                                </p>
+
+                                <div class="bg-gray-50 border border-gray-200 rounded-xl p-5 my-6">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="text-xs font-medium text-gray-500 uppercase">Amount Due</span>
+                                        <span class="text-xl font-bold text-gray-900">$5,000.00</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 h-px mb-3"></div>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-gray-500">Due Date</span>
+                                        <span class="font-medium text-red-500">Oct 17, 2025</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center pt-2">
+                                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5">
+                                        Pay Now securely
+                                    </button>
+                                    <p class="mt-4 text-[10px] text-gray-400 underline cursor-pointer">
+                                        Or view invoice details
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 py-2 text-center border-t border-gray-100 flex-shrink-0">
+                            <p class="text-[9px] text-gray-400 uppercase tracking-widest font-semibold">AUTOMATED BY MAXCREDIBLE</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex justify-end items-center gap-4 flex-shrink-0">
+                        <p class="text-xs text-slate-400 hidden lg:block">Ready to automate?</p>
+                        <button onclick="openRegistration()" class="bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-emerald-500/30 transition-all transform hover:scale-105 flex items-center gap-2">
+                            <i class="ph-bold ph-rocket-launch"></i> Activate Workflow
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="data-ingestion-section" class="hidden min-h-screen pt-24 pb-10 flex flex-col items-center justify-center relative transition-opacity duration-700 opacity-0">
+        
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-[20%] left-[-10%] w-[50%] h-[50%] bg-pink-600 rounded-full mix-blend-screen filter blur-[128px] opacity-10 animate-blob"></div>
+             <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600 rounded-full mix-blend-screen filter blur-[128px] opacity-10 animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="relative z-10 w-[95%] max-w-[1400px] mx-auto px-6 text-center">
+            
+            <div id="ingest-step-1" class="transition-all duration-500">
+                <button onclick="goBackToEntry()" class="absolute top-0 left-6 text-sm text-gray-400 hover:text-white mb-6 flex items-center gap-2 transition-colors">
+                    <i class="ph-bold ph-arrow-left"></i> Back to Goals
+                </button>
+
+                <h2 id="ingestion-title" class="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-200 via-white to-pink-200">Connect Data to Analyze Risk</h2>
+                <p class="text-gray-400 text-lg mb-12 max-w-2xl mx-auto">Select your bookkeeping system to instantly populate your dashboard with mock data.</p>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                        <div onclick="simulateConnect('Twinfield')" class="group p-6 bg-gray-800/40 hover:bg-gray-800/80 border border-white/5 hover:border-blue-500/50 rounded-2xl cursor-pointer transition-all hover:scale-[1.02] flex flex-col items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-blue-900 font-bold text-xl">T</div>
+                            <span class="font-medium text-gray-300 group-hover:text-white">Twinfield</span>
+                        </div>
+                        <div onclick="simulateConnect('Exact Online')" class="group p-6 bg-gray-800/40 hover:bg-gray-800/80 border border-white/5 hover:border-red-500/50 rounded-2xl cursor-pointer transition-all hover:scale-[1.02] flex flex-col items-center gap-4">
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-red-600 font-bold text-xl">E</div>
+                            <span class="font-medium text-gray-300 group-hover:text-white">Exact Online</span>
+                        </div>
+                         <div onclick="simulateConnect('AFAS')" class="group p-6 bg-gray-800/40 hover:bg-gray-800/80 border border-white/5 hover:border-blue-400/50 rounded-2xl cursor-pointer transition-all hover:scale-[1.02] flex flex-col items-center gap-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">A</div>
+                            <span class="font-medium text-gray-300 group-hover:text-white">AFAS</span>
+                        </div>
+                        <div onclick="simulateConnect('Billtobox')" class="group p-6 bg-gray-800/40 hover:bg-gray-800/80 border border-white/5 hover:border-indigo-500/50 rounded-2xl cursor-pointer transition-all hover:scale-[1.02] flex flex-col items-center gap-4">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">B</div>
+                            <span class="font-medium text-gray-300 group-hover:text-white">Billtobox</span>
+                        </div>
+                        <div onclick="simulateConnect('Jefacture')" class="group p-6 bg-gray-800/40 hover:bg-gray-800/80 border border-white/5 hover:border-green-500/50 rounded-2xl cursor-pointer transition-all hover:scale-[1.02] flex flex-col items-center gap-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold text-xl">J</div>
+                            <span class="font-medium text-gray-300 group-hover:text-white">Jefacture</span>
+                        </div>
+                        <div onclick="simulateConnect('Banqup')" class="group p-6 bg-gray-800/40 hover:bg-gray-800/80 border border-white/5 hover:border-purple-500/50 rounded-2xl cursor-pointer transition-all hover:scale-[1.02] flex flex-col items-center gap-4">
+                            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">B</div>
+                            <span class="font-medium text-gray-300 group-hover:text-white">Banqup</span>
+                        </div>
+                    </div>
+
+                    <div class="relative z-50"> <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="ph-bold ph-magnifying-glass text-gray-500"></i>
+                        </div>
+                        
+                        <input type="text" id="suite-search-input" placeholder="Search 60+ other integrations..." 
+                            class="w-full bg-gray-900/50 border border-gray-700 text-white rounded-xl py-4 pl-12 pr-4 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all placeholder-gray-600 hover:border-gray-600"
+                            autocomplete="off"
+                            onkeyup="handleSuiteSearch(this.value)">
+                        
+                        <div class="absolute inset-y-0 right-2 flex items-center">
+                            <button class="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-600 text-gray-300 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-2" onclick="simulateUpload()">
+                                <i class="ph-bold ph-upload-simple"></i> Upload CSV
+                            </button>
+                        </div>
+
+                        <div id="search-dropdown" class="absolute top-full left-0 w-full bg-gray-800 border border-gray-700 rounded-xl mt-2 max-h-60 overflow-y-auto hidden shadow-2xl custom-scrollbar">
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ingest-loader" class="hidden flex flex-col items-center justify-center py-20">
+                <div class="w-20 h-20 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mb-8"></div>
+                <h3 class="text-2xl font-bold text-white mb-2">Connecting to <span id="connecting-provider">Provider</span>...</h3>
+                <p class="text-gray-400">Analyzing ledger history and calculating risk scores.</p>
+            </div>
+
+            <div id="ingest-results" class="hidden w-full max-w-[1400px] mx-auto animate-fade-in text-left">
+                
+                <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-gray-800 pb-6 gap-6">
+                    <div>
+                        <p class="text-pink-400 text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                            <i class="ph-fill ph-check-circle"></i> Analysis Complete
+                        </p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Ledger Health Report</h2>
+                        <p class="text-gray-400 mt-1">Based on 142 records uploaded from <span id="connected-source" class="text-white font-semibold">Twinfield</span>.</p>
+                    </div>
+                    <div class="text-left md:text-right bg-white/5 p-4 rounded-2xl border border-white/10">
+                        <p class="text-gray-500 text-[10px] uppercase tracking-widest mb-1">Total Outstanding Exposure</p>
+                        <p class="text-3xl font-mono font-bold text-white tracking-tight">$42,350.00</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                    
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="bg-gray-800/40 border border-red-500/20 rounded-3xl p-6 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-400"></div>
+                            
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h3 class="font-bold text-red-200 text-lg flex items-center gap-2">
+                                        <i class="ph-fill ph-warning-circle text-red-500"></i> Critical Risks (Worst 5)
+                                    </h3>
+                                    <p class="text-xs text-red-400/60 mt-1">These clients negatively impact your cash flow.</p>
+                                </div>
+                                <span class="text-xs bg-red-500/10 text-red-300 px-3 py-1.5 rounded-lg border border-red-500/20 font-mono">Avg Score: 34/100</span>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="group p-4 bg-gray-900/40 hover:bg-gray-800 rounded-2xl border border-white/5 hover:border-red-500/30 cursor-pointer transition-all duration-300 flex justify-between items-center" 
+                                     onclick="openDebtorDetail('Acme Corp')">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center font-bold text-sm">A</div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-red-200 transition-colors">Acme Corp</p>
+                                            <p class="text-xs text-red-400 mt-0.5 flex items-center gap-1">
+                                                <i class="ph-bold ph-trend-up"></i> 58 Days Late (Avg)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="block font-mono font-bold text-white text-lg">$12,500</span>
+                                        <span class="text-[10px] text-gray-500 uppercase tracking-wide group-hover:text-red-400 transition-colors">View Analysis &rarr;</span>
+                                    </div>
+                                </div>
+
+                                <div class="group p-4 bg-gray-900/40 hover:bg-gray-800 rounded-2xl border border-white/5 hover:border-red-500/30 cursor-pointer transition-all duration-300 flex justify-between items-center"
+                                     onclick="openRegistration()">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-orange-500/10 text-orange-500 flex items-center justify-center font-bold text-sm">G</div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-orange-200 transition-colors">Globex Inc.</p>
+                                            <p class="text-xs text-orange-400 mt-0.5">42 Days Late (Avg)</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-mono font-bold text-white text-lg">$8,200</span>
+                                </div>
+
+                                <div class="group p-4 bg-gray-900/40 hover:bg-gray-800 rounded-2xl border border-white/5 hover:border-red-500/30 cursor-pointer transition-all duration-300 flex justify-between items-center"
+                                     onclick="openRegistration()">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-yellow-500/10 text-yellow-500 flex items-center justify-center font-bold text-sm">S</div>
+                                        <div>
+                                            <p class="font-bold text-white group-hover:text-yellow-200 transition-colors">Soylent Corp</p>
+                                            <p class="text-xs text-yellow-400 mt-0.5">Broken Promise (x2)</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-mono font-bold text-white text-lg">$5,100</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800/20 border border-emerald-500/10 rounded-3xl p-6 relative overflow-hidden opacity-60 hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="font-bold text-emerald-200 text-sm flex items-center gap-2">
+                                    <i class="ph-fill ph-star"></i> Star Clients
+                                </h3>
+                                <span class="text-[10px] text-emerald-400">Keep these happy</span>
+                            </div>
+                            <div class="flex gap-3 overflow-x-auto pb-2 hide-scroll">
+                                <div class="bg-gray-900/50 px-4 py-2 rounded-xl border border-white/5 min-w-[140px]">
+                                    <p class="text-white font-bold text-sm">Stark Ind.</p>
+                                    <p class="text-emerald-400 text-xs">12 Days (Avg)</p>
+                                </div>
+                                <div class="bg-gray-900/50 px-4 py-2 rounded-xl border border-white/5 min-w-[140px]">
+                                    <p class="text-white font-bold text-sm">Wayne Ent.</p>
+                                    <p class="text-emerald-400 text-xs">Early Payer</p>
+                                </div>
+                                <div class="bg-gray-900/50 px-4 py-2 rounded-xl border border-white/5 min-w-[140px]">
+                                    <p class="text-white font-bold text-sm">Cyberdyne</p>
+                                    <p class="text-emerald-400 text-xs">Auto-Pay</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5">
+                        <div class="h-full relative rounded-3xl overflow-hidden border border-white/10 group cursor-pointer shadow-2xl" onclick="openRegistration()">
+                            
+                            <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-md z-20 flex flex-col items-center justify-center text-center p-8 transition-all hover:bg-gray-900/70 group-hover:backdrop-blur-sm">
+                                <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-blue-600/50 group-hover:scale-110 transition-transform duration-500">
+                                    <i class="ph-fill ph-lock-key text-3xl text-white"></i>
+                                </div>
+                                <h3 class="text-3xl font-bold text-white mb-3">Unlock $12,500 Cash</h3>
+                                <p class="text-gray-300 mb-8 leading-relaxed">
+                                    We've identified <strong>3 high-risk accounts</strong> that are recoverable with a "Strict" journey.
+                                </p>
+                                <button class="bg-white text-blue-900 font-bold py-4 px-8 rounded-xl shadow-xl hover:scale-105 transition-transform flex items-center gap-2">
+                                    View Recovery Plan <i class="ph-bold ph-arrow-right"></i>
+                                </button>
+                                <p class="mt-4 text-xs text-gray-500">Free Analysis • No Credit Card Required</p>
+                            </div>
+                            
+                            <div class="bg-gray-800 p-8 h-full filter blur-sm select-none opacity-50">
+                                <div class="flex justify-between items-center mb-6">
+                                    <h3 class="font-bold text-white text-xl">Recovery Prediction</h3>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="h-32 bg-gray-700/50 rounded-2xl w-full animate-pulse"></div>
+                                    <div class="h-8 bg-gray-700/50 rounded-lg w-2/3"></div>
+                                    <div class="h-8 bg-gray-700/50 rounded-lg w-1/2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benchmark-section" class="hidden min-h-screen pt-24 pb-10 flex flex-col items-center justify-center relative transition-opacity duration-700 opacity-0">
+        
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-[10%] right-[20%] w-[40%] h-[40%] bg-emerald-600 rounded-full mix-blend-screen filter blur-[128px] opacity-10 animate-blob"></div>
+            <div class="absolute bottom-[10%] left-[20%] w-[40%] h-[40%] bg-teal-600 rounded-full mix-blend-screen filter blur-[128px] opacity-10 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="relative z-10 w-[95%] max-w-[1400px] mx-auto px-6 text-center">
+            
+            <button onclick="goBackToEntry()" class="absolute top-0 left-6 text-sm text-gray-400 hover:text-white mb-6 flex items-center gap-2 transition-colors">
+                <i class="ph-bold ph-arrow-left"></i> Back to Goals
+            </button>
+
+            <div id="benchmark-config" class="max-w-3xl mx-auto transition-all duration-500">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-emerald-200 via-white to-emerald-200">
+                    Where do you stand?
+                </h2>
+                <p class="text-gray-400 text-lg mb-10">Select your market to see how your payment speed compares to 10,000+ peers.</p>
+
+                <div class="bg-gray-800/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="text-left space-y-2">
+                            <label class="text-xs font-bold text-gray-500 uppercase tracking-widest">Region</label>
+                            <select id="bench-region" class="w-full bg-gray-900 border border-gray-700 text-white rounded-xl px-4 py-3 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 appearance-none">
+                                <option>Western Europe</option>
+                                <option>North America</option>
+                                <option>Asia Pacific</option>
+                            </select>
+                        </div>
+                        <div class="text-left space-y-2">
+                            <label class="text-xs font-bold text-gray-500 uppercase tracking-widest">Industry</label>
+                            <select id="bench-industry" class="w-full bg-gray-900 border border-gray-700 text-white rounded-xl px-4 py-3 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 appearance-none">
+                                <option value="SaaS">Technology & SaaS</option>
+                                <option value="Retail">Retail & Wholesale</option>
+                                <option value="Construction">Construction</option>
+                                <option value="Services">Business Services</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button onclick="runBenchmark()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <i class="ph-bold ph-lightning"></i> Generate Report
+                    </button>
+                </div>
+            </div>
+
+            <div id="benchmark-results" class="hidden max-w-5xl mx-auto animate-fade-in text-left">
+                
+                <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-gray-800 pb-6 gap-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">2025 Data</span>
+                            <span class="text-gray-500 text-xs" id="result-industry-tag">Technology & SaaS</span>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white">Performance Gap Analysis</h2>
+                    </div>
+                    <div class="text-right">
+                         <p class="text-gray-500 text-[10px] uppercase tracking-widest mb-1">Potential Cash Flow Unlock</p>
+                        <p class="text-3xl font-mono font-bold text-emerald-400 tracking-tight">$24,658</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/40 border border-white/10 rounded-3xl p-8 mb-8 relative overflow-hidden">
+                    
+                    <h3 class="font-bold text-white text-xl mb-6">Payment Velocity (DSO)</h3>
+                    
+                    <div class="space-y-8 relative">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Industry Average</span>
+                                <span class="text-white font-mono">53 Days</span>
+                            </div>
+                            <div class="w-full bg-gray-700/50 rounded-full h-4 overflow-hidden">
+                                <div class="bg-gray-500 h-full rounded-full" style="width: 53%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-white font-bold">Your Performance</span>
+                                <span class="text-orange-400 font-mono font-bold">62 Days</span>
+                            </div>
+                            <div class="w-full bg-gray-700/50 rounded-full h-4 overflow-hidden relative">
+                                <div class="bg-orange-500 h-full rounded-full transition-all duration-1000 ease-out w-0" id="bar-user-perf"></div>
+                            </div>
+                            <p class="text-xs text-orange-400 mt-2 flex items-center gap-1">
+                                <i class="ph-fill ph-warning"></i> You are getting paid <strong>9 days slower</strong> than your peers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-4 right-4">
+                        <button class="text-xs text-emerald-400 hover:text-emerald-300 underline" onclick="startFlow('insight')">Connect actual data</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="bg-gray-800/40 border border-white/10 rounded-3xl p-6">
+                        <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center text-xl mb-4">
+                            <i class="ph-fill ph-chart-pie-slice"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-lg mb-2">Terms vs. Reality</h4>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Your contracts say "30 Days," but your clients average "41 Days." This gap is costing you liquidity.
+                        </p>
+                        <div class="h-2 w-full bg-gray-700 rounded-full overflow-hidden flex">
+                            <div class="h-full bg-blue-500 w-[70%]"></div>
+                            <div class="h-full bg-red-500 w-[30%]"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-gray-500 mt-2">
+                            <span>Paid on time</span>
+                            <span class="text-red-400">Paid Late (30%)</span>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-gray-800/40 border border-emerald-500/30 rounded-3xl p-6 overflow-hidden cursor-pointer group" onclick="openRegistration()">
+                        <div class="absolute inset-0 bg-gray-900/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center text-center p-6 transition-all group-hover:bg-gray-900/70">
+                            <div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mb-3 shadow-lg shadow-emerald-500/50 animate-pulse">
+                                <i class="ph-bold ph-key text-white text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-1">Get the Action Plan</h4>
+                            <p class="text-gray-300 text-sm mb-4">See exactly how to close the 9-day gap.</p>
+                            <button class="bg-white text-emerald-900 font-bold py-2 px-6 rounded-lg text-sm shadow-xl hover:scale-105 transition-transform">
+                                Unlock Recommendations
+                            </button>
+                        </div>
+                        
+                        <div class="filter blur-sm select-none opacity-50">
+                            <h4 class="font-bold text-white text-lg mb-4">3 Steps to Improve</h4>
+                            <ul class="space-y-3">
+                                <li class="h-4 bg-gray-600 rounded w-3/4"></li>
+                                <li class="h-4 bg-gray-600 rounded w-1/2"></li>
+                                <li class="h-4 bg-gray-600 rounded w-5/6"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <div id="register-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-md transition-opacity" onclick="closeRegisterModal()"></div>
+        
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 animate-slide-up overflow-hidden">
+            
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" id="reg-bar"></div>
+            
+            <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+                <i class="ph-bold ph-x text-xl"></i>
+            </button>
+
+            <div class="text-center mb-8 mt-2">
+                <div id="reg-icon-container" class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-blue-500/20">
+                    <i id="reg-icon" class="ph-fill ph-rocket-launch"></i>
+                </div>
+                
+                <h2 id="reg-title" class="text-3xl font-bold text-gray-900 mb-2 leading-tight">Save your progress</h2>
+                <p id="reg-desc" class="text-gray-500 text-sm px-4">Create a free account to execute this action.</p>
+            </div>
+
+            <form onsubmit="handleRegistration(event)" class="space-y-4">
+                <div class="space-y-4">
+                    <input type="email" class="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-gray-900 transition-all placeholder-gray-400 font-medium" required placeholder="Work Email">
+                    <input type="password" class="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-gray-900 transition-all placeholder-gray-400 font-medium" required placeholder="Password">
+                </div>
+                
+                <button type="submit" id="reg-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-600/30 transition-all text-lg hover:-translate-y-0.5 mt-2">
+                    Create Account
+                </button>
+                
+                <p class="text-center text-xs text-gray-400 mt-4">
+                    By clicking above, you agree to our Terms of Service.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="onboarding.js"></script>
+</body>
+</html>
