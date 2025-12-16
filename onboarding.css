@@ -165,3 +165,14 @@ body {
     transform: scale(1.1);
     transition: transform 0.1s ease-out, color 0.1s;
 }
+
+/* Vertical Timeline Connectors */
+#risk-strategy .group:hover i {
+    transform: scale(1.2);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Ensure the line stays behind the dots */
+#risk-strategy .absolute.w-1 {
+    z-index: 0;
+}

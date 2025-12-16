@@ -1029,3 +1029,59 @@ function updateBenchmarkSimulation(days) {
     cashDisplay.classList.add('scale-110', 'text-white');
     setTimeout(() => cashDisplay.classList.remove('scale-110', 'text-white'), 100);
 }
+
+// --- 10. RISK STRATEGY BUILDER ---
+
+function showRiskStrategy() {
+    // Hide the Dashboard
+    const dashboard = document.getElementById('ingest-results');
+    dashboard.classList.add('opacity-0');
+    
+    setTimeout(() => {
+        dashboard.classList.add('hidden');
+        dashboard.classList.remove('opacity-0'); // reset
+        
+        // Show the Strategy Builder
+        const strategy = document.getElementById('risk-strategy');
+        strategy.classList.remove('hidden');
+        
+        // Staggered Entry Animation for Timeline Items
+        const items = strategy.querySelectorAll('.group, .relative');
+        items.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'all 0.5s ease-out';
+            
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+        
+    }, 500);
+}
+
+function selectChannel(type, btnElement) {
+    // 1. Reset all buttons in this container
+    const parent = btnElement.parentElement;
+    const allBtns = parent.querySelectorAll('.channel-btn');
+    
+    allBtns.forEach(btn => {
+        // Reset to default style
+        btn.className = "channel-btn px-4 py-2 rounded-lg bg-gray-800 border border-gray-600 text-gray-400 hover:text-white hover:border-white transition-all text-sm font-medium flex items-center gap-2";
+    });
+
+    // 2. Set Active Style based on type
+    if (type === 'both') {
+        btnElement.className = "channel-btn px-4 py-2 rounded-lg bg-red-600 border border-red-500 text-white shadow-lg shadow-red-600/20 text-sm font-medium flex items-center gap-2 scale-105";
+    } else if (type === 'call') {
+        btnElement.className = "channel-btn px-4 py-2 rounded-lg bg-purple-600 border border-purple-500 text-white shadow-lg shadow-purple-600/20 text-sm font-medium flex items-center gap-2 scale-105";
+    } else {
+        btnElement.className = "channel-btn px-4 py-2 rounded-lg bg-blue-600 border border-blue-500 text-white shadow-lg shadow-blue-600/20 text-sm font-medium flex items-center gap-2 scale-105";
+    }
+}
+
+function saveStrategy() {
+    // Just for the demo, go to registration
+    openRegistration();
+}
