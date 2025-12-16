@@ -761,80 +761,105 @@ function runBenchmark() {
 
 // --- 6. REGISTRATION & UTILS ---
 
+// --- 3. REGISTRATION & DATA CAPTURE (UPDATED) ---
+
 function openRegistration() {
     const modal = document.getElementById('register-modal');
-    const title = document.getElementById('reg-title');
-    const desc = document.getElementById('reg-desc');
-    const btn = document.getElementById('reg-btn');
-    const icon = document.getElementById('reg-icon');
-    const iconContainer = document.getElementById('reg-icon-container');
-    const bar = document.getElementById('reg-bar');
+    const assetList = document.getElementById('modal-asset-list');
+    
+    // 1. Determine Context based on Flow
+    let assetsHtml = '';
 
-    if (currentFlow === 'action') {
-        title.innerText = "Save your Payment Journey";
-        desc.innerText = "Create an account to save this configuration as a Fixed Profile.";
-        btn.innerText = "Save & Activate Workflow";
-        icon.className = "ph-fill ph-rocket-launch";
-        iconContainer.className = "w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-blue-500/20";
-        btn.className = "w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-600/30 transition-all text-lg hover:-translate-y-0.5 mt-2";
-        bar.className = "absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 to-blue-600";
-    } else if (currentFlow === 'insight') {
-        title.innerText = "Unlock Recoverable Cash";
-        desc.innerHTML = "Register to view the detailed <strong>Risk Report</strong>.";
-        btn.innerText = "Unlock Report";
-        icon.className = "ph-fill ph-lock-key-open";
-        iconContainer.className = "w-16 h-16 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-pink-500/20";
-        btn.className = "w-full bg-pink-600 hover:bg-pink-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-pink-600/30 transition-all text-lg hover:-translate-y-0.5 mt-2";
-        bar.className = "absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-400 to-rose-600";
+    if (currentFlow === 'insight') {
+        // Came from Risk Analysis / Strategy Builder
+        const exposure = document.getElementById('val-exposure') ? document.getElementById('val-exposure').innerText : '$42,350.00';
+        
+        assetsHtml = `
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center shrink-0">
+                    <i class="ph-fill ph-file-search text-pink-400 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">Risk Analysis Report</h4>
+                    <p class="text-gray-400 text-xs mt-0.5">Identified ${exposure} in recoverable cash.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">
+                    <i class="ph-fill ph-strategy text-purple-400 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">Recovery Strategy</h4>
+                    <p class="text-gray-400 text-xs mt-0.5">Automated timeline (Pre-minder to Escalation) configured.</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
+                    <i class="ph-fill ph-database text-blue-400 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">Data Connection</h4>
+                    <p class="text-gray-400 text-xs mt-0.5">Secure link to Twinfield Ledger established.</p>
+                </div>
+            </div>
+        `;
+
     } else if (currentFlow === 'benchmark') {
-        title.innerText = "Get the Action Plan";
-        desc.innerText = "Create an account to see the 3-step recommendation.";
-        btn.innerText = "View Recommendations";
-        icon.className = "ph-fill ph-chart-line-up";
-        iconContainer.className = "w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-emerald-500/20";
-        btn.className = "w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-emerald-600/30 transition-all text-lg hover:-translate-y-0.5 mt-2";
-        bar.className = "absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 to-teal-600";
-    } else if (currentFlow === 'skip') { 
-        title.innerText = "Save & Continue";
-        desc.innerText = "Create your account to enter the dashboard.";
-        btn.innerText = "Complete Setup";
-        icon.className = "ph-fill ph-user-circle";
-        iconContainer.className = "w-16 h-16 bg-slate-100 text-slate-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-slate-500/20";
-        btn.className = "w-full bg-slate-600 hover:bg-slate-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-slate-600/30 transition-all text-lg hover:-translate-y-0.5 mt-2";
-        bar.className = "absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-slate-400 to-gray-600";
+        // Came from Benchmark Simulator
+        assetsHtml = `
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
+                    <i class="ph-fill ph-chart-bar text-emerald-400 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">Peer Benchmark Report</h4>
+                    <p class="text-gray-400 text-xs mt-0.5">DSO performance analysis vs. Industry Standard.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center shrink-0">
+                    <i class="ph-fill ph-coins text-orange-400 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">Cash Unlock Simulation</h4>
+                    <p class="text-gray-400 text-xs mt-0.5">Projected revenue increase calculation saved.</p>
+                </div>
+            </div>
+        `;
+
+    } else {
+        // Default / Flow 1 (Get Paid Faster)
+        assetsHtml = `
+             <div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0">
+                    <i class="ph-fill ph-paint-brush-broad text-blue-400 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">Custom Brand Template</h4>
+                    <p class="text-gray-400 text-xs mt-0.5">Invoice design matched to ${appState.brandColorName} theme.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                    <i class="ph-fill ph-link text-green-400 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm">Payment Link Config</h4>
+                    <p class="text-gray-400 text-xs mt-0.5">Ready-to-send payment infrastructure.</p>
+                </div>
+            </div>
+        `;
     }
+
+    // Inject Content
+    assetList.innerHTML = assetsHtml;
+    
+    // Show Modal
     modal.classList.remove('hidden');
-}
-
-function closeRegisterModal() {
-    document.getElementById('register-modal').classList.add('hidden');
-}
-
-function skipOnboarding() {
-    currentFlow = 'skip';
-    openRegistration(); 
-}
-
-function handleRegistration(event) {
-    event.preventDefault();
-    const btn = event.target.querySelector('button[type="submit"]');
-    const originalText = btn.innerText;
-    btn.innerText = "Creating Account...";
-    btn.disabled = true;
-
-    setTimeout(() => {
-        btn.innerText = "Success!";
-        btn.classList.remove('bg-blue-600', 'bg-pink-600', 'bg-emerald-600', 'bg-slate-600');
-        btn.classList.add('bg-green-500');
-        alert("Account Created!\n\nSystem Notification: An email has been automatically sent to s.vantulder@maxcredible.com with these new user details.");
-        setTimeout(() => {
-            closeRegisterModal();
-            btn.disabled = false;
-            btn.innerText = originalText;
-            btn.classList.remove('bg-green-500');
-            btn.classList.add('bg-blue-600');
-        }, 1000);
-    }, 1500);
 }
 
 // --- 8. RISK SIMULATION LOGIC ---

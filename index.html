@@ -1227,40 +1227,59 @@
         </div>
     </section>
 
-    <div id="register-modal" class="fixed inset-0 z-[60] hidden">
-        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-md transition-opacity" onclick="closeRegisterModal()"></div>
-        
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 animate-slide-up overflow-hidden">
-            
-            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" id="reg-bar"></div>
-            
-            <button onclick="closeRegisterModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
-                <i class="ph-bold ph-x text-xl"></i>
-            </button>
+    <div id="register-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-gray-900/90 backdrop-blur-md transition-opacity" onclick="closeRegisterModal()"></div>
 
-            <div class="text-center mb-8 mt-2">
-                <div id="reg-icon-container" class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-blue-500/20">
-                    <i id="reg-icon" class="ph-fill ph-rocket-launch"></i>
-                </div>
+        <div class="relative w-full max-w-4xl bg-gray-900 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-700">
+            
+            <div class="w-full md:w-5/12 bg-gray-800/50 p-8 border-r border-gray-700 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-pink-500 to-emerald-500"></div>
                 
-                <h2 id="reg-title" class="text-3xl font-bold text-gray-900 mb-2 leading-tight">Save your progress</h2>
-                <p id="reg-desc" class="text-gray-500 text-sm px-4">Create a free account to execute this action.</p>
+                <h3 class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6">Unsaved Session Progress</h3>
+                
+                <div id="modal-asset-list" class="space-y-4">
+                    </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-700">
+                    <div class="flex items-center gap-3 text-yellow-400 bg-yellow-400/10 p-3 rounded-lg border border-yellow-400/20">
+                        <i class="ph-fill ph-warning-circle text-xl"></i>
+                        <p class="text-xs font-medium leading-relaxed">Closing this tab will permanently delete this configuration.</p>
+                    </div>
+                </div>
             </div>
 
-            <form onsubmit="handleRegistration(event)" class="space-y-4">
-                <div class="space-y-4">
-                    <input type="email" class="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-gray-900 transition-all placeholder-gray-400 font-medium" required placeholder="Work Email">
-                    <input type="password" class="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-gray-900 transition-all placeholder-gray-400 font-medium" required placeholder="Password">
+            <div class="w-full md:w-7/12 p-8 md:p-12 bg-white flex flex-col justify-center">
+                <div class="mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Save your work</h2>
+                    <p class="text-gray-500 text-sm">Create a free account to secure these assets.</p>
                 </div>
+
+                <form onsubmit="handleRegistration(event)" class="space-y-4">
+                    <div class="space-y-4">
+                        <div class="group">
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 group-focus-within:text-blue-600 transition-colors">Work Email</label>
+                            <input type="email" class="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-gray-900 transition-all font-medium placeholder-gray-300" required placeholder="name@company.com">
+                        </div>
+                        <div class="group">
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1 group-focus-within:text-blue-600 transition-colors">Password</label>
+                            <input type="password" class="w-full p-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-gray-900 transition-all font-medium placeholder-gray-300" required placeholder="••••••••">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="reg-btn" class="w-full bg-gray-900 hover:bg-black text-white py-4 rounded-xl font-bold shadow-xl shadow-gray-900/20 transition-all text-lg hover:-translate-y-0.5 mt-4 flex items-center justify-center gap-2">
+                        <span>Save & Continue</span> <i class="ph-bold ph-arrow-right"></i>
+                    </button>
+                    
+                    <p class="text-center text-xs text-gray-400 mt-4">
+                        By joining, you agree to our Terms of Service.
+                    </p>
+                </form>
                 
-                <button type="submit" id="reg-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-600/30 transition-all text-lg hover:-translate-y-0.5 mt-2">
-                    Create Account
+                <button onclick="closeRegisterModal()" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 transition-colors">
+                    <i class="ph-bold ph-x text-xl"></i>
                 </button>
-                
-                <p class="text-center text-xs text-gray-400 mt-4">
-                    By clicking above, you agree to our Terms of Service.
-                </p>
-            </form>
+            </div>
+
         </div>
     </div>
 
