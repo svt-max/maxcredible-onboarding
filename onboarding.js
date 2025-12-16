@@ -640,15 +640,94 @@ function selectSuite(suiteName) {
 }
 
 function simulateConnect(provider) {
+    // 1. Hide Input, Show Initial Loader
     document.getElementById('ingest-step-1').classList.add('hidden');
     document.getElementById('ingest-loader').classList.remove('hidden');
     document.getElementById('connecting-provider').innerText = provider;
+    
     const resultSource = document.getElementById('connected-source');
     if(resultSource) resultSource.innerText = provider;
+
+    // 2. Transition to Sorting Phase after 1.5 seconds
     setTimeout(() => {
         document.getElementById('ingest-loader').classList.add('hidden');
-        document.getElementById('ingest-results').classList.remove('hidden');
-    }, 2000);
+        runSortingAnimation();
+    }, 1500);
+}
+
+function runSortingAnimation() {
+    const stage = document.getElementById('sorting-phase');
+    const riskTarget = document.getElementById('target-risk');
+    const safeTarget = document.getElementById('target-safe');
+    const metrics = document.getElementById('sorting-metrics');
+    const riskCounter = document.getElementById('counter-risk');
+    const safeCounter = document.getElementById('counter-safe');
+    const emitter = document.getElementById('particle-emitter');
+
+    // Reveal Stage
+    stage.classList.remove('hidden');
+    
+    // Activate Targets visually
+    setTimeout(() => {
+        riskTarget.classList.remove('opacity-30', 'scale-90');
+        riskTarget.classList.add('bg-red-500/10', 'border-red-500', 'shadow-[0_0_30px_rgba(239,68,68,0.2)]');
+        
+        safeTarget.classList.remove('opacity-30', 'scale-90');
+        safeTarget.classList.add('bg-emerald-500/10', 'border-emerald-500', 'shadow-[0_0_30px_rgba(16,185,129,0.2)]');
+        
+        metrics.classList.remove('opacity-0');
+    }, 300);
+
+    // Run Particle Loop
+    let riskCount = 0;
+    let safeCount = 0;
+    let particleInterval = setInterval(() => {
+        const isRisk = Math.random() > 0.6; // 40% risk, 60% safe
+        const type = isRisk ? 'particle-risk' : 'particle-safe';
+        
+        // Update Counters
+        if(isRisk) {
+            riskCount++;
+            riskCounter.innerText = riskCount;
+        } else {
+            safeCount++;
+            safeCounter.innerText = safeCount;
+        }
+
+        // Create DOM Element
+        const p = document.createElement('div');
+        p.className = `particle ${type}`;
+        // Random Y destination to make it look like a stream
+        const yDest = (Math.random() * 60 - 30) + 'px'; 
+        p.style.setProperty('--y-dest', yDest);
+        
+        emitter.appendChild(p);
+        
+        // Cleanup DOM
+        setTimeout(() => p.remove(), 800);
+
+    }, 50); // Speed of particles
+
+    // 3. End Animation and Show Results
+    setTimeout(() => {
+        clearInterval(particleInterval);
+        stage.classList.add('opacity-0'); // Fade out stage
+        
+        setTimeout(() => {
+            stage.classList.add('hidden');
+            stage.classList.remove('opacity-0'); // Reset for next time if needed
+            
+            // Show Final Dashboard
+            document.getElementById('ingest-results').classList.remove('hidden');
+            
+            // Reset Styles for re-run
+            riskTarget.className = "absolute left-20 w-24 h-24 rounded-2xl border-2 border-dashed border-gray-700 flex items-center justify-center transition-all duration-500 opacity-30 scale-90";
+            safeTarget.className = "absolute right-20 w-24 h-24 rounded-2xl border-2 border-dashed border-gray-700 flex items-center justify-center transition-all duration-500 opacity-30 scale-90";
+            riskCounter.innerText = "0";
+            safeCounter.innerText = "0";
+            
+        }, 500);
+    }, 3500); // Duration of sorting phase
 }
 
 function simulateUpload() {
@@ -756,4 +835,197 @@ function handleRegistration(event) {
             btn.classList.add('bg-blue-600');
         }, 1000);
     }, 1500);
+}
+
+// --- 8. RISK SIMULATION LOGIC ---
+
+let simulationActive = false;
+
+function toggleRiskSimulation() {
+    simulationActive = !simulationActive;
+
+    const toggleBg = document.getElementById('sim-toggle-bg');
+    const toggleDot = document.getElementById('sim-toggle-dot');
+    const cardExposure = document.getElementById('card-exposure');
+    const cardRecovered = document.getElementById('card-recovered');
+    
+    // Toggle Switch Visuals
+    if (simulationActive) {
+        toggleBg.classList.remove('bg-gray-600');
+        toggleBg.classList.add('bg-emerald-500');
+        toggleDot.classList.add('translate-x-4');
+        
+        // Show Recovered Card
+        cardRecovered.classList.remove('hidden');
+        cardRecovered.classList.add('block'); // Ensure display
+        
+        // Animate Numbers
+        animateValue("val-exposure", 42350, 12500, 1500, "$"); // Risk goes DOWN
+        animateValue("val-recovered", 0, 29850, 1500, "$");    // Cash goes UP
+        
+        // Transform the List (Visual Feedback)
+        transformRiskList(true);
+        
+    } else {
+        toggleBg.classList.add('bg-gray-600');
+        toggleBg.classList.remove('bg-emerald-500');
+        toggleDot.classList.remove('translate-x-4');
+        
+        // Hide Recovered Card
+        cardRecovered.classList.add('hidden');
+        cardRecovered.classList.remove('block');
+
+        // Reset Numbers
+        animateValue("val-exposure", 12500, 42350, 500, "$");
+        
+        // Reset List
+        transformRiskList(false);
+    }
+}
+
+function animateValue(id, start, end, duration, prefix = "") {
+    const obj = document.getElementById(id);
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        
+        // Easing function (easeOutQuart)
+        const ease = 1 - Math.pow(1 - progress, 4);
+        
+        const current = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = prefix + current.toLocaleString('en-US', {minimumFractionDigits: 2});
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+function transformRiskList(isPositive) {
+    // This targets the specific "Critical Risks" rows we defined in the HTML
+    const riskContainer = document.querySelector('.lg\\:col-span-7 .bg-gray-800\\/40');
+    if (!riskContainer) return;
+
+    if (isPositive) {
+        // Change Header Color
+        riskContainer.classList.remove('border-red-500/20');
+        riskContainer.classList.add('border-emerald-500/30', 'bg-emerald-900/10');
+        
+        // Change Rows visually
+        // We use a CSS class approach or direct manipulation for the demo
+        const rows = riskContainer.querySelectorAll('.group');
+        rows.forEach((row, index) => {
+            // Find the icon circle
+            const icon = row.querySelector('.rounded-full');
+            icon.classList.remove('bg-red-500/10', 'text-red-500', 'bg-orange-500/10', 'text-orange-500', 'bg-yellow-500/10', 'text-yellow-500');
+            icon.classList.add('bg-emerald-500/20', 'text-emerald-400');
+            icon.innerHTML = '<i class="ph-bold ph-check"></i>'; // Change letter to checkmark
+
+            // Change Text
+            const subtext = row.querySelector('p.text-xs');
+            const oldText = subtext.innerText;
+            row.dataset.oldText = oldText; // Save for revert
+            
+            // Stagger the text update
+            setTimeout(() => {
+                subtext.className = 'text-xs text-emerald-400 mt-0.5 flex items-center gap-1';
+                subtext.innerHTML = '<i class="ph-bold ph-calendar-check"></i> Payment Plan Active';
+            }, index * 200);
+        });
+
+        // Update Header Text
+        const header = riskContainer.querySelector('h3');
+        header.innerHTML = '<i class="ph-fill ph-shield-check text-emerald-500"></i> Protected Cash Flow';
+        header.classList.remove('text-red-200');
+        header.classList.add('text-emerald-200');
+
+    } else {
+        // REVERT TO NEGATIVE STATE
+        riskContainer.classList.add('border-red-500/20');
+        riskContainer.classList.remove('border-emerald-500/30', 'bg-emerald-900/10');
+        
+        const rows = riskContainer.querySelectorAll('.group');
+        rows.forEach(row => {
+            const icon = row.querySelector('.rounded-full');
+            icon.classList.remove('bg-emerald-500/20', 'text-emerald-400');
+            
+            // Re-apply original colors (simplified for demo)
+            icon.classList.add('bg-red-500/10', 'text-red-500'); 
+            const originalLetter = row.querySelector('p.font-bold').innerText.charAt(0);
+            icon.innerText = originalLetter;
+
+            const subtext = row.querySelector('p.text-xs');
+            // Revert classes
+            if(subtext.innerText.includes('Payment Plan')) {
+               subtext.className = 'text-xs text-red-400 mt-0.5 flex items-center gap-1';
+               subtext.innerHTML = row.dataset.oldText || 'Overdue';
+            }
+        });
+
+        const header = riskContainer.querySelector('h3');
+        header.innerHTML = '<i class="ph-fill ph-warning-circle text-red-500"></i> Critical Risks (Worst 5)';
+        header.classList.add('text-red-200');
+        header.classList.remove('text-emerald-200');
+    }
+}
+
+// --- 9. BENCHMARK SIMULATOR ---
+
+function updateBenchmarkSimulation(days) {
+    const industryAvg = 53;
+    const salesPerDay = 2740; // Approx $1M revenue / 365
+    
+    // Update Visuals
+    const maxVal = 90; // Matches HTML max
+    const percentage = (days / maxVal) * 100;
+    
+    const bar = document.getElementById('dso-visual-bar');
+    const thumb = document.getElementById('dso-thumb');
+    const display = document.getElementById('dso-display-val');
+    const cashDisplay = document.querySelector('#benchmark-results .text-3xl.font-mono'); // The Cash Unlock Number
+    const feedback = document.getElementById('dso-feedback-text');
+
+    // Move Elements
+    bar.style.width = `${percentage}%`;
+    thumb.style.left = `calc(${percentage}% - 12px)`;
+    display.innerText = `${days} Days`;
+
+    // Logic: Color Changes based on Industry Avg
+    if (days <= industryAvg) {
+        bar.className = "absolute h-4 bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full pointer-events-none transition-all duration-75";
+        thumb.className = "absolute w-6 h-6 bg-white rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)] border-2 border-emerald-500 pointer-events-none transition-all duration-75 flex items-center justify-center z-10";
+        display.className = "text-emerald-400 font-mono font-bold";
+        
+        feedback.innerHTML = `<i class="ph-fill ph-trophy text-emerald-500"></i> You are beating the industry average by <strong>${industryAvg - days} days</strong>!`;
+        feedback.className = "text-xs text-emerald-400 mt-3 flex items-center gap-1 transition-colors duration-300";
+    } else {
+        bar.className = "absolute h-4 bg-gradient-to-r from-orange-600 to-orange-400 rounded-full pointer-events-none transition-all duration-75";
+        thumb.className = "absolute w-6 h-6 bg-white rounded-full shadow-[0_0_15px_rgba(249,115,22,0.5)] border-2 border-orange-500 pointer-events-none transition-all duration-75 flex items-center justify-center z-10";
+        display.className = "text-orange-400 font-mono font-bold";
+        
+        const gap = days - industryAvg;
+        feedback.innerHTML = `<i class="ph-fill ph-warning text-orange-500"></i> You are <strong>${gap} days</strong> slower than peers.`;
+        feedback.className = "text-xs text-orange-400 mt-3 flex items-center gap-1 transition-colors duration-300";
+    }
+
+    // MATH: Calculate Cash Unlocked
+    // Formula: (Current_Actual_62 - New_Simulated_Value) * Daily_Sales
+    // Note: The original static HTML said $24,658 for 62 days vs 53 days. 
+    // That implies (62-53) * X = 24658 -> X ≈ 2740/day.
+    
+    const startDays = 62; // The user's "Real" starting point
+    let cashUnlocked = (startDays - days) * salesPerDay;
+    
+    // Formatting
+    if (cashUnlocked < 0) cashUnlocked = 0; // Don't show negative if they drag right (getting worse)
+    
+    cashDisplay.innerText = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(cashUnlocked);
+    
+    // Add a little "pop" animation to the text when it updates
+    cashDisplay.classList.remove('scale-110', 'text-white');
+    void cashDisplay.offsetWidth; // Trigger reflow
+    cashDisplay.classList.add('scale-110', 'text-white');
+    setTimeout(() => cashDisplay.classList.remove('scale-110', 'text-white'), 100);
 }

@@ -91,3 +91,77 @@ body {
 .perspective-1000 {
     perspective: 1000px;
 }
+
+/* Sorting Animation Particles */
+@keyframes flyLeft {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translate(-180px, var(--y-dest)) scale(1); opacity: 0; }
+}
+
+@keyframes flyRight {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translate(180px, var(--y-dest)) scale(1); opacity: 0; }
+}
+
+.particle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    margin-top: -6px;
+    margin-left: -6px;
+    z-index: 0;
+}
+
+.particle-risk {
+    background-color: #ef4444; /* Red 500 */
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    animation: flyLeft 0.8s ease-out forwards;
+}
+
+.particle-safe {
+    background-color: #10b981; /* Emerald 500 */
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    animation: flyRight 0.8s ease-out forwards;
+}
+
+/* --- Living Social Proof Badges --- */
+@keyframes live-pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes live-pulse-blue {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+@keyframes live-pulse-pink {
+    0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(236, 72, 153, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
+}
+
+.live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.pulse-green { background-color: #10b981; animation: live-pulse-green 2s infinite; }
+.pulse-blue { background-color: #3b82f6; animation: live-pulse-blue 2s infinite; }
+.pulse-pink { background-color: #ec4899; animation: live-pulse-pink 2s infinite; }
+
+
+/* Number Pulse for Calculator */
+.scale-110 {
+    transform: scale(1.1);
+    transition: transform 0.1s ease-out, color 0.1s;
+}
